@@ -1,19 +1,27 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import HomeScreen from './src/screen/HomeScreen';
+import { Provider } from './src/context/MineMatrixContext';
+import SettingScreen from './src/screen/SettingScreen';
 
-export default function App() {
+
+const navigator = createStackNavigator({
+  home: HomeScreen,
+  setting: SettingScreen
+}, {
+  initialRouteKey: "home",
+  defaultNavigationOptions: {
+    title: "Minesweeper",
+  }
+});
+
+const App = createAppContainer(navigator);
+
+export default () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+      <Provider>
+        <App />
+      </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
